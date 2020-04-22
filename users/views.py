@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
-from .forms import UserRegisterForm
+from .forms import *
 from django.contrib.auth.decorators import login_required 
 from django.db import connection 
 
@@ -25,7 +25,7 @@ def profile(request):
     return render(request,'users/profile.html')
 
 @login_required
-def query1(request):
+def query1a(request):
     with connection.cursor() as cursor:
         cursor.execute("select * from player;")
         columns_names = [col[0] for col in cursor.description]
@@ -53,5 +53,53 @@ def query1(request):
                 tmp.append(tmp2)
             data.append(tmp)
 
-        print(data,columns)
+        # print(data,columns)
     return render(request,'users/profile.html',{'query':1,'data':data,'columns':columns})
+
+@login_required
+def query2a(request):
+    with connection.cursor() as cursor:
+        cursor.execute("select * from employee;")
+        columns_names = [col[0] for col in cursor.description]
+        data_raw = cursor.fetchall()
+
+        columns = []
+        c=1
+        for i in columns_names:
+            tmp = {
+                'text':i,
+                'meta':'cell100 column'+str(c),
+            }
+            columns.append(tmp)
+            c+=1
+        data = []
+        for i in data_raw:
+            tmp = []
+            c = 1
+            for col in i:
+                tmp2 = {
+                    'text' :col,
+                    'meta' : 'cell100 column'+str(c),
+                }
+                c+=1
+                tmp.append(tmp2)
+            data.append(tmp)
+
+        # print(data,columns)
+    return render(request,'users/profile.html',{'query':2,'data':data,'columns':columns})
+
+@login_required
+def query3a(request):
+    if request.method == 'POST':
+        form = IdForm(request.POST)
+        if form.is_valid():
+            # print(form.data['id'],form.data['new_salary'],int(form.data['new_salary']),int(form.data['id']))
+            print(form.data)
+            with connection.cursor() as cursor:
+                cursor.execute("update employee set salary = %s where id = %s",[form.data['new_salary'],form.data['id']])
+            id = form.data['id']
+            messages.success(request, f'Salary Updated for employee with ID {id}')  
+        return redirect('profile')
+    else:
+        form = IdForm()
+    return render(request,'users/profile.html',{'query':3,'form':form})

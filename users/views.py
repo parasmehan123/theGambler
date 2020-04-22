@@ -36,6 +36,19 @@ def extract_data(query):
             data.append(tmp)
     return (columns,data)
 
+def id_query(request,query,query_no):
+    if request.method == 'POST':
+        form = Id_Form(request.POST)
+        if form.is_valid():
+            # print(form.data)
+            columns,data = extract_data(query%(form.data['id']))
+            return render(request,'users/profile.html',{'query':query_no,'data':data,'columns':columns})
+
+        return render(request,'users/profile.html',{'query':query_no,'form':form,})
+    else :
+        form = Id_Form()
+    return render(request,'users/profile.html',{'query':query_no,'form':form})
+
 def register(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
@@ -86,31 +99,11 @@ def query3a(request):
 
 @login_required
 def query4a(request):
-    if request.method == 'POST':
-        form = Id_Form(request.POST)
-        if form.is_valid():
-            # print(form.data)
-            columns,data = extract_data("select * from player where id=%s;"%(form.data['id']))
-            return render(request,'users/profile.html',{'query':4,'data':data,'columns':columns})
-
-        return render(request,'users/profile.html',{'query':4,'form':form,})
-    else :
-        form = Id_Form()
-    return render(request,'users/profile.html',{'query':4,'form':form})
+    return id_query(request,"select * from player where id=%s;",4)
 
 @login_required
 def query5a(request):
-    if request.method == 'POST':
-        form = Id_Form(request.POST)
-        if form.is_valid():
-            # print(form.data)
-            columns,data = extract_data("select * from employee where id=%s;"%(form.data['id']))
-            return render(request,'users/profile.html',{'query':5,'data':data,'columns':columns})
-
-        return render(request,'users/profile.html',{'query':5,'form':form,})
-    else :
-        form = Id_Form()
-    return render(request,'users/profile.html',{'query':5,'form':form})
+    return id_query(request,"select * from employee where id=%s;",5)
 
 @login_required
 def query6a(request):
@@ -132,3 +125,7 @@ def query6a(request):
     else:
         form = New_Employee()
     return render(request,'users/profile.html',{'query':6,'form':form})
+
+@login_required
+def query7a(request):
+    return id_query(request,"select max(total_profit) as Maximum_Profit FROM game WHERE id IN ( SELECT game_id FROM made WHERE game_maker_id =  %s);",7)

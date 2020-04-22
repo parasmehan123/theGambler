@@ -14,7 +14,7 @@ drop table if exists casino_dealer;
 create table casino_dealer(id int primary key,speciality varchar(1000) not null, employee_id int not null,foreign key (employee_id) references employee(id) on delete cascade on update cascade);
 
 drop table if exists game_maker;
-create table game_maker(id int primary key,information_needs varchar(1000) not null, employee_id int not null,foreign key (employee_id) references employee(id) on delete cascade on update cascade);
+create table game_maker(id int primary key auto_increment,information_needs varchar(1000) not null, employee_id int not null unique ,foreign key (employee_id) references employee(id) on delete cascade on update cascade);
 
 drop table if exists bank_transactions;
 create table bank_transactions(id int primary key, amount int not null,debit_credit boolean not null,dt datetime, account_id int not null,accounts_employee_id int not null,bank_account_no int not null,foreign key(account_id) references account(id) on delete cascade on update cascade, foreign key (accounts_employee_id) references accounts_employee(id) on delete cascade on update cascade);

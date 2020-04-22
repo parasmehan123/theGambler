@@ -1,0 +1,29 @@
+{% extends "casino/base.html" %}
+{% load crispy_forms_tags%}
+{% block content %}
+    <h1 style="text-align:center;color:OldLace ">UserName:{{ user.username }}</h1>
+              {% if user.is_staff %} 
+              <h2 style="text-align:center;color:OldLace ">Staff Status : Employee</h2>            
+                <a class="nav-item nav-link" style="font-size:25px;text-align:center;color:OldLace "  href="{% url 'query1' %}">View Details</a>
+                <a class="nav-item nav-link" style="font-size:25px;text-align:center;color:OldLace " href="{% url 'query2' %}">View Salary</a>
+                <a class="nav-item nav-link" style="font-size:25px;text-align:center;color:OldLace " href="{% url 'query3' %}">View Feedbacks</a>
+                <a class="nav-item nav-link" style="font-size:25px;text-align:center;color:OldLace " href="{% url 'query4' %}">View Work Schedule</a>
+                <a class="nav-item nav-link" style="font-size:25px;text-align:center;color:OldLace " href="{% url 'query5' %}">View Benefits</a>
+                <a class="nav-item nav-link" style="font-size:25px;text-align:center;color:OldLace " href="{% url 'query6' %}">Add Suggestions</a>
+
+              {% else %}
+                <h2 style="text-align:center;color:OldLace ">Status : Player</h2>  
+              	<a class="nav-item nav-link" style="font-size:25px;text-align:center;color:OldLace " href="{% url 'query7' %}">View Details</a>
+                <a class="nav-item nav-link" style="font-size:25px;text-align:center;color:OldLace " href="{% url 'query8' %}">View Profits</a>
+                <a class="nav-item nav-link" style="font-size:25px;text-align:center;color:OldLace " href="{% url 'query9' %}">View Loses</a>
+                <a class="nav-item nav-link" style="font-size:25px;text-align:center;color:OldLace " href="{% url 'query10' %}">View Previous Wins</a>
+                <a class="nav-item nav-link" style="font-size:25px;text-align:center;color:OldLace " href="{% url 'query11' %}">View Playing History</a>
+                <a class="nav-item nav-link" style="font-size:25px;text-align:center;color:OldLace " href="{% url 'query12' %}">View Previous Transactions</a>
+                <a class="nav-item nav-link" style="font-size:25px;text-align:center;color:OldLace " href="{% url 'query13' %}">View Current Balance</a>
+                <a class="nav-item nav-link" style="font-size:25px;text-align:center;color:OldLace " href="{% url 'query14' %}">Play Online</a>
+                <a class="nav-item nav-link" style="font-size:25px;text-align:center;color:OldLace " href="{% url 'query15' %}">View Games Available</a>
+                <a class="nav-item nav-link" style="font-size:25px;text-align:center;color:OldLace " href="{% url 'query16' %}">View players ranked above you</a>
+                <a class="nav-item nav-link" style="font-size:25px;text-align:center;color:OldLace " href="{% url 'query17' %}">View players ranked below you</a>
+              {% endif %}
+            
+{% endblock content %}

@@ -1,0 +1,9 @@
+{% extends "casino/base.html" %}
+{% block content %}
+    <h2>You have been Logged Out </h2>
+    <div class="content-section">        
+        <div class="border-top pt-3">
+                <a class="ml-2" href="{% url 'login' %}">Login Again</a>
+        </div>
+    </div>
+{% endblock content %}

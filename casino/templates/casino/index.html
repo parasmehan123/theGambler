@@ -1,0 +1,280 @@
+{% load static %}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>GAMBLERS</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<meta name="Description" content="Your website description goes here.">
+<meta name="KeyWords" content="keyword1, keyword2, keyword3">
+<link href="style.css" rel="stylesheet" type="text/css">
+{% if title %}
+        <title>Casino Website  - {{ title }}</title>
+    {% else %}
+        <title>Casino Website</title>
+    {% endif %}
+</head>
+
+<body>
+
+<table align="center" bgcolor="#6C4B37" border="0" cellpadding="0" cellspacing="0" width="965">
+  <tbody><tr>
+    <td valign="top" width="965"><table border="0" cellpadding="0" cellspacing="0" width="965">
+      <tbody><tr>
+        <td style="background-repeat:no-repeat;" background="{% static 'casino/images/header.jpg' %}" height="459" valign="top" width="965"><div style="padding-left:115px;">
+          
+          
+	  <a href="{% url 'casino-home' %}" style="font-size:25px;padding-left:5px;padding-top:100px;color:OldLace;">THE GAMBLERS</a>
+    <table border="0" cellpadding="0" cellspacing="0" width="250">
+              <tbody><tr>
+                
+              </tr>
+              <tr>
+                
+              </tr>
+                  </tbody></table>
+        </div></td>
+      </tr>
+      
+      <tr>
+        <td style="background-repeat:repeat-x;" background="{% static 'casino/images/nav_bg.jpg' %}" height="46" valign="top" width="965"><table align="center" border="0" cellpadding="0" cellspacing="0" width="840">
+          <tbody><tr>
+            {% if user.is_authenticated %}
+                <td valign="top" align="left" width="37"><img src="{% static 'casino/images/nav_dvd.jpg' %}" height="46" width="37"></td>
+                <td align="center" valign="middle" width="50"><a href="{% url 'profile' %}" style="color:OldLace" class="navbar2">Profile</a></td>
+                <td valign="top" width="37"></td>
+                <td valign="top" width="37"><img src="{% static 'casino/images/nav_dvd.jpg' %}" height="46" width="37"></td>
+                <td align="center" valign="middle" width="50"><a href="{% url 'logout' %}" style="color:OldLace" class="navbar2">Logout</a></td>
+                <td valign="top" align="right" width="37"><img src="{% static 'casino/images/nav_dvd.jpg' %}" height="46" width="37"></td>
+              {% else %}
+                <td valign="top" align="left" width="37"><img src="{% static 'casino/images/nav_dvd.jpg' %}" height="46" width="37"></td>
+                <td align="center" valign="middle" width="50"><a href="{% url 'login' %}" style="color:OldLace" class="navbar2">Login</a></td>
+                <td valign="top" width="37"></td>
+                <td valign="top" width="37"><img src="{% static 'casino/images/nav_dvd.jpg' %}" height="46" width="37"></td>
+                <td align="center" valign="middle" width="50"><a href="{% url 'register' %}" style="color:OldLace" class="navbar2">Register</a></td>
+                <td valign="top" align="right" width="37"><img src="{% static 'casino/images/nav_dvd.jpg' %}" height="46" width="37"></td>           
+            {% endif %}
+            
+            
+          </tr>
+        </tbody></table></td>
+      </tr>
+      
+
+    </tbody></table></td>
+  </tr>
+  <tr>
+    <td valign="top" width="965"><table align="center" border="0" cellpadding="0" cellspacing="0" width="935">
+      <tbody><tr>
+        <td valign="top" width="230"><table border="0" cellpadding="0" cellspacing="0" width="230">
+          <tbody><tr>
+            <td valign="top" width="230">&nbsp;</td>
+          </tr>
+          <tr>
+            <td class="head-1" style="background-repeat:no-repeat;" background="{% static 'casino/images/onl_pokr_lnks.jpg' %}" height="40" valign="middle" width="230"><div style="padding-left:0px;text-align:center;color:OldLace">Review</div></td>
+          </tr>
+          
+          <tr>
+            <td valign="top" width="230"><table bgcolor="#14100C" border="0" cellpadding="0" cellspacing="0" width="230">
+              <tbody><tr>
+                <td valign="top" width="35">&nbsp;</td>
+                <td valign="top" width="195">&nbsp;</td>
+              </tr>
+              <tr>
+                
+                <td height="22" valign="top" ><p class="navbar3" style="text-align:centre;color:OldLace;padding-left:25px;padding-top:0px;">Review by {{ feedback2.player_id }}. {{ feedback2.comment}}</p></td>
+              </tr>
+
+              <tr>
+                <td valign="top">&nbsp;</td>
+                <td valign="top">&nbsp;</td>
+              </tr>
+            </tbody></table></td>
+          </tr>
+          <tr>
+            <td valign="top" width="230">&nbsp;</td>
+          </tr>
+          <tr>
+            <td class="head-1" style="background-repeat:no-repeat;" background="{% static 'casino/images/onl_pokr_lnks.jpg' %}" height="40" valign="middle"  width="230"><div style="padding-left:0px;text-align:center;color:OldLace" >Review</div></td>
+          </tr>
+          <tr>
+            <td valign="top" width="230"><table bgcolor="#14100C" border="0" cellpadding="0" cellspacing="0" width="230">
+              <tbody><tr>
+                <td valign="top" width="35">&nbsp;</td>
+                <td valign="top" width="195">&nbsp;</td>
+              </tr>
+              <tr>
+                
+                <td height="22" valign="top" ><p class="navbar3" style="text-align:centre;color:OldLace;padding-left:25px;padding-top:0px;">Review by {{ feedback1.player_id }}. {{ feedback1.comment}}</p></td>
+              </tr>
+              
+              <tr>
+                <td valign="top">&nbsp;</td>
+                <td valign="top">&nbsp;</td>
+              </tr>
+            </tbody></table></td>
+          </tr>
+          <tr>
+            <td valign="top" width="230">&nbsp;</td>
+          </tr>
+          <tr>
+            <td valign="top" width="230">&nbsp;</td>
+          </tr>
+
+        </tbody></table></td>
+        <td valign="top" width="25">&nbsp;</td>
+        <td valign="top" width="680"><table border="0" cellpadding="0" cellspacing="0" width="680">
+          <tbody><tr>
+            <td height="25" valign="top" width="680">&nbsp;</td>
+          </tr>
+          <tr>
+            <td valign="top" width="680"><table border="0" cellpadding="0" cellspacing="0" width="680">
+              <tbody><tr>
+                <td valign="top" width="58"><img src="{% static 'casino/images/cards.jpg' %}" height="34" width="49"></td>
+                <td class="head-3" valign="middle" width="622" style="color:OldLace;font-size:25px;">Welcome to Gamblers</td>
+              </tr>
+            </tbody></table></td>
+          </tr>
+          <tr>
+            <td height="8" valign="top" width="680"><br>
+</td>
+          </tr>
+          <tr>
+            <td class="txt-2" valign="top" width="680" style="color:AntiqueWhite">The thrill of anticipation as you spin our slots. The concentration as your eyes chase the roulette ball. The moment of suspense before you look at your cards. A world of possibility awaits. Welcome to The Gamblers. Play casino games online with us to enjoy the very best in online games entertainment whenever and wherever it suits you. These live games are played with a real, professional dealer; you place your bets and manage your bankroll online, then watch as the dealer follows your commands and completes the game – all via live video feed. Your payouts are awarded directly to your bankroll, and you also benefit from increased in-game information and a leaderboard. Choose to play your casino games online using virtual chips in Practice Play or, alternatively, play our Real Money games for the chance to win actual cash payouts. Enhance your overall experience even further by taking a look at our range of online casino bonuses</td>
+          </tr>
+          <tr>
+            <td valign="top" width="680">&nbsp;</td>
+          </tr>
+          <tr>
+            <td valign="top" width="680"><table border="0" cellpadding="0" cellspacing="0" width="680">
+              <tbody><tr>
+                <td valign="top" width="58"><img src="{% static 'casino/images/cards.jpg' %}" height="34" width="49"></td>
+                <td class="head-3" valign="middle" width="622" style="color:OldLace;font-size:25px;">List of Top Casino Games</td>
+              </tr>
+            </tbody></table></td>
+          </tr>
+          <tr>
+            <td valign="top" width="680">&nbsp;</td>
+          </tr>
+          <tr>
+            <td class="head-4" style="background-repeat:no-repeat;" background="{% static 'casino/images/casino_name.jpg' %}" height="35" valign="middle" width="680"><div style="padding-left:35px;padding-top:3px;color:OldLace">Online Slots</div></td>
+          </tr>
+          <tr>
+            <td valign="top" width="680"><table style="background-repeat:repeat-y;" background="{% static 'casino/images/casino_bg.jpg' %}" border="0" cellpadding="0" cellspacing="0" width="680">
+              <tbody><tr>
+                <td valign="top" width="680"><img src="{% static 'casino/images/casino_top.jpg' %}" height="3" width="680"></td>
+              </tr>
+              <tr>
+                <td height="8" valign="top" width="680"><br>
+</td>
+              </tr>
+              <tr>
+                <td valign="top" width="680"><table align="center" border="0" cellpadding="0" cellspacing="0" width="645">
+                  <tbody><tr>
+                    <td valign="top" width="155"><a href="#"><img src="{% static 'casino/images/pic.jpg' %}" border="0" height="107" width="140"></a></td>
+                    <td class="txt-2" valign="middle" width="490" style="color:AntiqueWhite">An online casino simply wouldn’t be the same without online slots, and at Betway, we pride ourselves on our collection. From the latest releases, to some tried-and-tested favourites, we’ve got it all.
+
+Call back to the days of traditional fruit machines with our retro slots like Mega Money Multiplier, Diamond Empire and Cool Buck. Or spend some time exploring some of the homegrown brands from our game providers, which have become classics in their own right, like Jungle Jim and Lucky Links.</td>
+                  </tr>
+                </tbody></table></td>
+              </tr>
+              <tr>
+                <td height="8" valign="top" width="680"><br>
+</td>
+              </tr>
+              <tr>
+                <td valign="top" width="680"><img src="{% static 'casino/images/casino_btm.jpg' %}" height="3" width="680"></td>
+              </tr>
+            </tbody></table></td>
+          </tr>
+          <tr>
+            <td valign="top" width="680">&nbsp;</td>
+          </tr>
+          <tr>
+            <td class="head-4" style="background-repeat:no-repeat;" background="{% static 'casino/images/casino_name.jpg' %}" height="35" valign="middle" width="680"><div style="padding-left:35px;padding-top:3px;color:OldLace">Online BlackJack</div></td>
+          </tr>
+          <tr>
+            <td valign="top" width="680"><table style="background-repeat:repeat-y;" background="{% static 'casino/images/casino_bg.jpg' %}" border="0" cellpadding="0" cellspacing="0" width="680">
+              <tbody><tr>
+                <td valign="top" width="680"><img src="{% static 'casino/images/casino_top.jpg' %}" height="3" width="680"></td>
+              </tr>
+              <tr>
+                <td height="8" valign="top" width="680"><br>
+</td>
+              </tr>
+              <tr>
+                <td valign="top" width="680"><table align="center" border="0" cellpadding="0" cellspacing="0" width="645">
+                    <tbody><tr>
+                      <td valign="top" width="155"><a href="#"><img src="{% static 'casino/images/pic.jpg' %}" border="0" height="107" width="140"></a></td>
+                      <td class="txt-2" valign="middle" width="490" style="color:AntiqueWhite">High stakes. Tangible drama. You vs the dealer. Blackjack – a globally popular card game, a staple of casinos the world over, and often the focal point of the silver screen. Join any one of our online blackjack tables at Betway and you’ll soon see why.
+
+The origin of the game is unknown, but it’s been widely played for centuries. Blackjack goes by many different names. Twenty-One, Pontoon, Vingt-et-Un. And no matter what name you go by, we’ll have something for you.</td>
+                    </tr>
+                </tbody></table></td>
+              </tr>
+              <tr>
+                <td height="8" valign="top" width="680"><br>
+</td>
+              </tr>
+              <tr>
+                <td valign="top" width="680"><img src="{% static 'casino/images/casino_btm.jpg' %}" height="3" width="680"></td>
+              </tr>
+            </tbody></table></td>
+          </tr>
+          <tr>
+            <td class="head-4" style="background-repeat:no-repeat;" background="{% static 'casino/images/casino_name.jpg' %}" height="35" valign="middle" width="680"><div style="padding-left:35px;padding-top:3px;color:OldLace">Online Roulette</div></td>
+          </tr>
+          <tr>
+            <td valign="top" width="680"><table style="background-repeat:repeat-y;" background="{% static 'casino/images/casino_bg.jpg' %}" border="0" cellpadding="0" cellspacing="0" width="680">
+              <tbody><tr>
+                <td valign="top" width="680"><img src="{% static 'casino/images/casino_top.jpg' %}" height="3" width="680"></td>
+              </tr>
+              <tr>
+                <td height="8" valign="top" width="680"><br>
+</td>
+              </tr>
+              <tr>
+                <td valign="top" width="680"><table align="center" border="0" cellpadding="0" cellspacing="0" width="645">
+                    <tbody><tr>
+                      <td valign="top" width="155"><a href="#"><img src="{% static 'casino/images/pic.jpg' %}" border="0" height="107" width="140"></a></td>
+                      <td class="txt-2" valign="middle" width="490" style="color:AntiqueWhite">Online Roulette
+It’s impossible to imagine a casino without picturing a roulette table. The dizzying spin of the wheel and blur of numbers. The tapping sound of the ball as is settles into a pocket. The edge-of-your-seat element of chance.
+
+The momentous game originated in 18th century France and is named after the French word meaning ‘little wheel’. But in the game we know today, the wheels can come in lots of different sizes.</td>
+                    </tr>
+                </tbody></table></td>
+              </tr>
+              <tr>
+                <td height="8" valign="top" width="680"><br>
+</td>
+              </tr>
+              <tr>
+                <td valign="top" width="680"><img src="{% static 'casino/images/casino_btm.jpg' %}" height="3" width="680"></td>
+              </tr>
+            </tbody></table></td>
+          </tr>
+          <tr>
+            <td valign="top" width="680">&nbsp;</td>
+          </tr>
+          <tr>
+            <td valign="top" width="680">&nbsp;</td>
+          </tr>
+        </tbody></table></td>
+      </tr>
+    </tbody></table></td>
+  </tr>
+<tr>
+    <td style="background-repeat:repeat-x;" background="{% static 'casino/images/nav_bg.jpg' %}" height="45" valign="top" width="970"><table align="center" border="0" cellpadding="0" cellspacing="0"  width="920">
+      <tbody><tr>
+        <td class="head-1" height="45" valign="middle" width="750"><strong></strong></td>
+        <td class="head-1" height="45" valign="middle" width="920" style="font-size:25px;color:OldLace "><strong>THE GAMBLERS</strong></td>
+      </tr>
+    </tbody></table></td>
+  </tr>
+
+</tbody></table>
+</body></html>

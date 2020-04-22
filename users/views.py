@@ -25,6 +25,7 @@ def register(request):
 @login_required
 def profile(request):
     return render(request,'users/profile.html')
+message = ""
 @login_required
 def play(request):
     global word, message, jword

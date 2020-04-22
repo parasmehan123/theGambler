@@ -1,0 +1,60 @@
+DROP TABLE IF EXISTS player;
+create table player(id int primary key auto_increment,name varchar(200) not null,mobile_number varchar(10),address varchar(1000),email varchar(1000));
+
+DROP TABLE IF EXISTS account;
+create table account(id int primary key,player_id int not null, current_balance int not null,date_of_opening datetime not null,foreign key (player_id) references player(id) on delete cascade on update cascade,check(current_balance >=0));
+
+drop table if exists employee;
+create table employee(id int primary key, name varchar(200),position varchar(100) not null,mobile varchar(200),address varchar(1000),salary int not null, email varchar(1000));
+
+drop table if exists accounts_employee;
+create table accounts_employee(id int primary key,office_number int not null, employee_id int not null,foreign key (employee_id) references employee(id) on delete cascade on update cascade);
+
+drop table if exists casino_dealer;
+create table casino_dealer(id int primary key,speciality varchar(1000) not null, employee_id int not null,foreign key (employee_id) references employee(id) on delete cascade on update cascade);
+
+drop table if exists game_maker;
+create table game_maker(id int primary key,information_needs varchar(1000) not null, employee_id int not null,foreign key (employee_id) references employee(id) on delete cascade on update cascade);
+
+drop table if exists bank_transactions;
+create table bank_transactions(id int primary key, amount int not null,debit_credit boolean not null,dt datetime, account_id int not null,accounts_employee_id int not null,bank_account_no int not null,foreign key(account_id) references account(id) on delete cascade on update cascade, foreign key (accounts_employee_id) references accounts_employee(id) on delete cascade on update cascade);
+
+drop table if exists cash_transactions;
+create table cash_transactions(id int primary key, amount int not null,debit_credit boolean not null,dt datetime, account_id int not null,accounts_employee_id int not null,amount_paid int not null,cash_change int not null,foreign key(account_id) references account(id) on delete cascade on update cascade, foreign key (accounts_employee_id) references accounts_employee(id) on delete cascade on update cascade);
+
+drop table if exists feedback;
+create table feedback(id int primary key, employee_id int not null, player_id int not null, foreign key (employee_id) references employee(id) on delete cascade on update cascade, foreign key (player_id) references player(id) on delete cascade on update cascade);
+
+drop table if exists game;
+create table game(id int primary key, name varchar(200) not null, rules varchar(1000),no_of_games_played int not null, total_profit int not null, total_loss int not null, added_on datetime not null);
+
+drop table if exists made;
+create table made(id int primary key, game_maker_id int not null, game_id int not null,foreign key (game_maker_id) references game_maker(id) on delete cascade on update cascade,foreign key (game_id) references game(id) on delete cascade on update cascade);
+
+drop table if exists casino_game;
+create table casino_game(id int primary key, game_id int not null,location varchar(200) not null,casino_dealer_id int not null,foreign key (game_id) references game(id) on delete cascade on update cascade,foreign key (casino_dealer_id) references casino_dealer(id) on delete cascade on update cascade);
+
+drop table if exists online_game;
+create table online_game(id int primary key, game_id int not null,ip varchar(12) not null,foreign key (game_id) references game(id) on delete cascade on update cascade);
+
+drop tables if exists management;
+create table management(id int primary key,name varchar(200) not null,mobile varchar(10),roles varchar(1000) not null,email varchar(1000), salary int not null);
+
+drop table if exists manages;
+create table manages(id int primary key,employee_id int not null, manager_id int not null,foreign key (employee_id) references employee(id) on delete cascade on update cascade,foreign key (manager_id) references management(id) on delete cascade on update cascade);
+
+drop table if exists player_ranklist;
+create table player_ranklist(rank int primary key, player_id int not null,no_of_wins int not null, no_of_loses int not null, total_profit int not null, total_loss int not null, foreign key (player_id) references player(id) on delete cascade on update cascade); 
+
+drop table if exists game_details;
+create table game_details(id int primary key,rank int not null,game_id int not null, player_id int not null,no_of_wins int not null, no_of_losses int not null, amount_won int not null, amount_lost int not null, foreign key (game_id) references game(id)  on delete cascade on update cascade, foreign key (player_id) references player(id)  on delete cascade on update cascade);
+
+
+
+
+
+
+
+
+
+

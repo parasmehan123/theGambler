@@ -23,3 +23,35 @@ def register(request):
 @login_required
 def profile(request):
     return render(request,'users/profile.html')
+
+@login_required
+def query1(request):
+    with connection.cursor() as cursor:
+        cursor.execute("select * from player;")
+        columns_names = [col[0] for col in cursor.description]
+        data_raw = cursor.fetchall()
+
+        columns = []
+        c=1
+        for i in columns_names:
+            tmp = {
+                'text':i,
+                'meta':'cell100 column'+str(c),
+            }
+            columns.append(tmp)
+            c+=1
+        data = []
+        for i in data_raw:
+            tmp = []
+            c = 1
+            for col in i:
+                tmp2 = {
+                    'text' :col,
+                    'meta' : 'cell100 column'+str(c),
+                }
+                c+=1
+                tmp.append(tmp2)
+            data.append(tmp)
+
+        print(data,columns)
+    return render(request,'users/profile.html',{'query':1,'data':data,'columns':columns})

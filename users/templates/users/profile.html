@@ -23,7 +23,7 @@
     <!--===============================================================================================-->
     
               {% if user.is_staff %} 
-              <h2 style="text-align:center;color:OldLace ">Staff Status : Employee</h2>            
+              <h2 style="text-align:center;color:OldLace ">Staff Status : Manager</h2>            
                 <a class="nav-item nav-link" style="font-size:25px;text-align:center;color:OldLace "  href="{% url 'query1a' %}">View Details of All Players</a>
                   {% if query == 1 %} 
                       <div class="limiter">
@@ -100,9 +100,114 @@
                       </div>
                     </div>
                   {% endif %}
-          
                 <a class="nav-item nav-link" style="font-size:25px;text-align:center;color:OldLace "  href="{% url 'query3a' %}">Change Salary Of an Employee</a>
                   {% if query == 3 %}
+                  <div class="container"> 
+                    <form method="post">
+                      {% csrf_token %}
+                      {{ form|crispy }}
+                      <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>                
+                  </div>       
+                  {% endif %}
+                <a class="nav-item nav-link" style="font-size:25px;text-align:center;color:OldLace "  href="{% url 'query4a' %}">View Details of a Player Using Its ID</a>
+                  {% if query == 4 %}
+                    {% if form %}
+                    <div class="container"> 
+                      <form method="post">
+                        {% csrf_token %}
+                        {{ form|crispy }}
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                      </form>                
+                    </div>   
+                    {% elif data %}
+                    <div class="limiter">
+                      <div class="container-table100" style="background: #6c4b37">
+                        <div class="wrap-table100">
+                          
+                          <div class="table100 ver3 m-b-110">
+                            <div class="table100-head">
+                              <table>
+                                <thead>
+                                  <tr class="row100 head">
+                                    {% for col in columns%}
+                                    <th class={{ col.meta }} style="color:#FFFFFF">{{ col.text }}</th>
+                                    {% endfor %}
+                                  </tr>
+                                </thead>
+                              </table>
+                            </div>
+                  
+                            <div class="table100-body js-pscroll">
+                              <table>
+                                <tbody>
+                                  {% for row in data %}
+                                    <tr class="row100 body">
+                                      {% for col in row %}
+                                        <td class={{ col.meta }}>{{ col.text }}</td>
+                                      {% endfor %}
+                                    </tr>
+                                  {% endfor%}
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                  
+                        </div>
+                      </div>
+                    </div>
+                    {% endif %}   
+                  {% endif %}
+                <a class="nav-item nav-link" style="font-size:25px;text-align:center;color:OldLace "  href="{% url 'query5a' %}">View Details of a Employee Using Its ID</a>
+                  {% if query == 5 %}
+                    {% if form %}
+                      <div class="container"> 
+                        <form method="post">
+                          {% csrf_token %}
+                          {{ form|crispy }}
+                          <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>                
+                      </div>   
+                    {% elif data %}
+                      <div class="limiter">
+                        <div class="container-table100" style="background: #6c4b37">
+                          <div class="wrap-table100">
+                            
+                            <div class="table100 ver3 m-b-110">
+                              <div class="table100-head">
+                                <table>
+                                  <thead>
+                                    <tr class="row100 head">
+                                      {% for col in columns%}
+                                      <th class={{ col.meta }} style="color:#FFFFFF">{{ col.text }}</th>
+                                      {% endfor %}
+                                    </tr>
+                                  </thead>
+                                </table>
+                              </div>
+                    
+                              <div class="table100-body js-pscroll">
+                                <table>
+                                  <tbody>
+                                    {% for row in data %}
+                                      <tr class="row100 body">
+                                        {% for col in row %}
+                                          <td class={{ col.meta }}>{{ col.text }}</td>
+                                        {% endfor %}
+                                      </tr>
+                                    {% endfor%}
+                                  </tbody>
+                                </table>
+                              </div>
+                            </div>
+                    
+                          </div>
+                        </div>
+                      </div>
+                    {% endif %}  
+                  {% endif %}
+                <a class="nav-item nav-link" style="font-size:25px;text-align:center;color:OldLace "  href="{% url 'query6a' %}">Add a Newly Hired Employee</a>
+                  {% if query == 6 %}
                   <div class="container"> 
                     <form method="post">
                       {% csrf_token %}

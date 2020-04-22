@@ -4,6 +4,38 @@ from .forms import *
 from django.contrib.auth.decorators import login_required 
 from django.db import connection 
 
+
+
+def extract_data(query):
+    with connection.cursor() as cursor:
+        cursor.execute(query)
+
+        columns_names = [col[0] for col in cursor.description]
+        data_raw = cursor.fetchall()
+
+        columns = []
+        c=1
+        for i in columns_names:
+            tmp = {
+                'text':i,
+                'meta':'cell100 column'+str(c),
+            }
+            columns.append(tmp)
+            c+=1
+        data = []
+        for i in data_raw:
+            tmp = []
+            c = 1
+            for col in i:
+                tmp2 = {
+                    'text' :col,
+                    'meta' : 'cell100 column'+str(c),
+                }
+                c+=1
+                tmp.append(tmp2)
+            data.append(tmp)
+    return (columns,data)
+
 def register(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
@@ -26,80 +58,77 @@ def profile(request):
 
 @login_required
 def query1a(request):
-    with connection.cursor() as cursor:
-        cursor.execute("select * from player;")
-        columns_names = [col[0] for col in cursor.description]
-        data_raw = cursor.fetchall()
+    columns,data = extract_data("select * from player;")
 
-        columns = []
-        c=1
-        for i in columns_names:
-            tmp = {
-                'text':i,
-                'meta':'cell100 column'+str(c),
-            }
-            columns.append(tmp)
-            c+=1
-        data = []
-        for i in data_raw:
-            tmp = []
-            c = 1
-            for col in i:
-                tmp2 = {
-                    'text' :col,
-                    'meta' : 'cell100 column'+str(c),
-                }
-                c+=1
-                tmp.append(tmp2)
-            data.append(tmp)
-
-        # print(data,columns)
     return render(request,'users/profile.html',{'query':1,'data':data,'columns':columns})
 
 @login_required
 def query2a(request):
-    with connection.cursor() as cursor:
-        cursor.execute("select * from employee;")
-        columns_names = [col[0] for col in cursor.description]
-        data_raw = cursor.fetchall()
+    columns,data = extract_data("select * from employee;")
 
-        columns = []
-        c=1
-        for i in columns_names:
-            tmp = {
-                'text':i,
-                'meta':'cell100 column'+str(c),
-            }
-            columns.append(tmp)
-            c+=1
-        data = []
-        for i in data_raw:
-            tmp = []
-            c = 1
-            for col in i:
-                tmp2 = {
-                    'text' :col,
-                    'meta' : 'cell100 column'+str(c),
-                }
-                c+=1
-                tmp.append(tmp2)
-            data.append(tmp)
-
-        # print(data,columns)
     return render(request,'users/profile.html',{'query':2,'data':data,'columns':columns})
 
 @login_required
 def query3a(request):
     if request.method == 'POST':
-        form = IdForm(request.POST)
+        form = Id_SalaryForm(request.POST)
         if form.is_valid():
             # print(form.data['id'],form.data['new_salary'],int(form.data['new_salary']),int(form.data['id']))
-            print(form.data)
+            # print(form.data)
             with connection.cursor() as cursor:
                 cursor.execute("update employee set salary = %s where id = %s",[form.data['new_salary'],form.data['id']])
             id = form.data['id']
             messages.success(request, f'Salary Updated for employee with ID {id}')  
         return redirect('profile')
     else:
-        form = IdForm()
+        form = Id_SalaryForm()
     return render(request,'users/profile.html',{'query':3,'form':form})
+
+@login_required
+def query4a(request):
+    if request.method == 'POST':
+        form = Id_Form(request.POST)
+        if form.is_valid():
+            # print(form.data)
+            columns,data = extract_data("select * from player where id=%s;"%(form.data['id']))
+            return render(request,'users/profile.html',{'query':4,'data':data,'columns':columns})
+
+        return render(request,'users/profile.html',{'query':4,'form':form,})
+    else :
+        form = Id_Form()
+    return render(request,'users/profile.html',{'query':4,'form':form})
+
+@login_required
+def query5a(request):
+    if request.method == 'POST':
+        form = Id_Form(request.POST)
+        if form.is_valid():
+            # print(form.data)
+            columns,data = extract_data("select * from employee where id=%s;"%(form.data['id']))
+            return render(request,'users/profile.html',{'query':5,'data':data,'columns':columns})
+
+        return render(request,'users/profile.html',{'query':5,'form':form,})
+    else :
+        form = Id_Form()
+    return render(request,'users/profile.html',{'query':5,'form':form})
+
+@login_required
+def query6a(request):
+    if request.method == 'POST':
+        form = New_Employee(request.POST)
+        if form.is_valid():
+            # print(form.data)
+            with connection.cursor() as cursor:
+                #create table employee(id int primary key , name varchar(200),position varchar(100) not null,mobile varchar(200),address varchar(1000),salary int not null, email varchar(1000));
+                STATES = {
+                    'E1':'Accounts Employee',
+                    'E2': 'Game Maker',
+                    'E3': 'Casino Dealer'
+                }
+                cursor.execute("insert into employee values(%s,%s,%s,%s,%s,%s,%s);",[form.data['id'],form.data['name'],STATES[form.data['position']],form.data['mobile'],form.data['address'],form.data['salary'],form.data['email']])
+            
+            messages.success(request, f'New Employee Account Created!!')  
+        return redirect('profile')
+    else:
+        form = New_Employee()
+    return render(request,'users/profile.html',{'query':6,'form':form})

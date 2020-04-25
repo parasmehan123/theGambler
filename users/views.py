@@ -29,11 +29,25 @@ def play(request):
 def checkans(request):
     global word, jword, message
     user_ans = request.GET["answer"]
-    if (user_ans in words):
+    won = True
+    if (user_ans in words):   
+
         message = "That was the correct answer. Great job!"
         
     else:
+        won = False
         message = "Oop! Better Luck next time!"
+
+    query = "insert into game_transaction(user_email,won_lost,dt) values(\""+request.user.email+"\","
+    if won:
+        query += 'TRUE'
+    else:
+        query += 'FALSE'
+
+    query += ",NOW());"
+    # print(query)
+    with connection.cursor() as cursor:
+        cursor.execute(query)
 
     return play(request)
 

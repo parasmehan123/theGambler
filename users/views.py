@@ -3,8 +3,39 @@ from django.contrib import messages
 from .forms import *
 from django.contrib.auth.decorators import login_required 
 from django.db import connection 
+import random
+words = ["casino","acute","gallon","communication","crosswalk","peasant","fix","knee","discrimination","indoor","paragraph","bathroom","fountain","acid","fasle","wealth","mayor","country","fee","march"]
 
 
+
+
+@login_required
+def profile(request):
+    return render(request,'users/profile.html')
+
+message = ""
+@login_required
+def play(request):
+    global word, message, jword
+    word = random.choice(words)
+    jum = random.sample(word,len(word))
+    jword = "".join(jum)
+    context = {
+        'jword' : "".join(jum),
+        'message' : message
+    }
+
+    return render(request,'users/play.html',context)
+def checkans(request):
+    global word, jword, message
+    user_ans = request.GET["answer"]
+    if (user_ans in words):
+        message = "That was the correct answer. Great job!"
+        
+    else:
+        message = "Oop! Better Luck next time!"
+
+    return play(request)
 
 def extract_data(query):
     with connection.cursor() as cursor:

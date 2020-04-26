@@ -59,9 +59,6 @@
                 <td valign="top" width="37"><img src="{% static 'casino/images/nav_dvd.jpg' %}" height="46" width="37"></td>
                 <td align="center" valign="middle" width="50"><a href="{% url 'play' %}" style="color:OldLace; "  class="navbar2">Play Game</a></td>
 
-                <td valign="top" width="37"></td>
-		<td valign="top" width="37"><img src="{% static 'casino/images/nav_dvd.jpg' %}" height="46" width="37"></td>
-                <td align="center" valign="middle" width="50"><a href="{% url 'play' %}" style="color:OldLace; "  class="navbar2">Play Game</a></td>
                 <td valign="top" width="37"><img src={% static 'casino/images/nav_dvd.jpg' %} height="46" width="37"></td>
                 <td align="center" valign="middle" width="50"><a href={% url 'register' %} style="color:OldLace" class="navbar2">Register</a></td>
                 <td valign="top" align="right" width="37"><img src={% static 'casino/images/nav_dvd.jpg' %} height="46" width="37"></td>           
@@ -93,8 +90,11 @@
                 <td valign="top" width="195">&nbsp;</td>
               </tr>
               <tr>
-                
+                {% if user.is_authenticated %}
                 <td height="22" valign="top" ><p class="navbar3" style="text-align:centre;color:OldLace;padding-left:25px;padding-top:0px;">Review by {{ feedback2.player_id }}. {{ feedback2.comment}}</p></td>
+                {% else %}
+                <td height="22" valign="top" ><p class="navbar3" style="text-align:centre;color:OldLace;padding-left:25px;padding-top:0px;">Review by user1. I just loved the games and the ambience. Great place!!</p></td>
+                {% endif %}
               </tr>
 
               <tr>
@@ -116,10 +116,11 @@
                 <td valign="top" width="195">&nbsp;</td>
               </tr>
               <tr>
-                
+                {% if user.is_authenticated %}
                 <td height="22" valign="top" ><p class="navbar3" style="text-align:centre;color:OldLace;padding-left:25px;padding-top:0px;">Review by {{ feedback1.player_id }}. {{ feedback1.comment}}</p></td>
-              </tr>
-              
+                {% else %}
+                <td height="22" valign="top" ><p class="navbar3" style="text-align:centre;color:OldLace;padding-left:25px;padding-top:0px;">Review by user2. The bartender was a bit rude but other than that its a nice place.</p></td>
+                {% endif %}
               <tr>
                 <td valign="top">&nbsp;</td>
                 <td valign="top">&nbsp;</td>

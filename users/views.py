@@ -16,16 +16,19 @@ def profile(request):
 message = ""
 @login_required
 def play(request):
-    global word, message, jword
-    word = random.choice(words)
-    jum = random.sample(word,len(word))
-    jword = "".join(jum)
-    context = {
-        'jword' : "".join(jum),
-        'message' : message
-    }
+    if request.user.is_staff == False:
+        global word, message, jword
+        word = random.choice(words)
+        jum = random.sample(word,len(word))
+        jword = "".join(jum)
+        context = {
+            'jword' : "".join(jum),
+            'message' : message
+        }
 
-    return render(request,'users/play.html',context)
+        return render(request,'users/play.html',context)
+    return render(request,'users/profile.html')
+
 def checkans(request):
     global word, jword, message
     user_ans = request.GET["answer"]
@@ -38,7 +41,7 @@ def checkans(request):
         won = False
         message = "Oop! Better Luck next time!"
 
-    query = "insert into game_transaction(user_email,won_lost,dt) values(\""+request.user.email+"\","
+    query = "insert into game_transaction(player_id,won_lost,dt) values(\""+str(request.user.id+13)+"\","
     if won:
         query += 'TRUE'
     else:
@@ -112,7 +115,13 @@ def register(request):
 
 @login_required
 def profile(request):
-    return render(request,'users/profile.html')
+    if request.user.is_staff:
+        return render(request,'users/profile.html')
+    query = "select * from player where id = %s;"%(request.user.id+13)
+    columns,data =  extract_data(query)
+    # print(query)
+    return render(request,'users/profile.html',{'pro_data':data,'pro_columns':columns})
+
 
 @login_required
 def query1a(request):
@@ -174,3 +183,4 @@ def query6a(request):
 @login_required
 def query7a(request):
     return id_query(request,"select max(total_profit) as Maximum_Profit FROM game WHERE id IN ( SELECT game_id FROM made WHERE game_maker_id =  %s);",7)
+

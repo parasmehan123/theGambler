@@ -54,7 +54,7 @@ def checkans(request):
     with connection.cursor() as cursor:
         cursor.execute(query)
 
-    return play(request)
+    return placebid(request)
 @login_required
 def placebid(request):
     global betb, betv,message

@@ -16,18 +16,23 @@ def profile(request):
 message = ""
 @login_required
 def play(request):
-    global word, message, jword
+    global word, message, jword ,betb, betv
+    message = ""
+    betb = request.GET["q1"]
+    betv = request.GET["bet"]
     word = random.choice(words)
     jum = random.sample(word,len(word))
     jword = "".join(jum)
     context = {
         'jword' : "".join(jum),
-        'message' : message
+        'message' : message,
+        'betv' : betv,
+        'betb' : betb
     }
 
     return render(request,'users/play.html',context)
 def checkans(request):
-    global word, jword, message
+    global word, jword, message,betb, betv
     user_ans = request.GET["answer"]
     won = True
     if (user_ans in words):   
@@ -50,7 +55,13 @@ def checkans(request):
         cursor.execute(query)
 
     return play(request)
-
+@login_required
+def placebid(request):
+    global betb, betv,message
+    context = {
+        'message' : message,        
+    }
+    return render(request,'users/placebid.html',context)
 def extract_data(query):
     with connection.cursor() as cursor:
         cursor.execute(query)

@@ -42,7 +42,7 @@ def checkans(request):
     else:
         won = False
         message = "Oop! Better Luck next time!"
-
+    #comment starts here
     query = "insert into game_transaction(user_email,won_lost,dt) values(\""+request.user.email+"\","
     if won:
         query += 'TRUE'
@@ -53,7 +53,7 @@ def checkans(request):
     # print(query)
     with connection.cursor() as cursor:
         cursor.execute(query)
-
+    #comment ends here
     return placebid(request)
 @login_required
 def placebid(request):

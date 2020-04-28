@@ -6,10 +6,12 @@
 	<div align="center" style="background-color:#6C4B37;">
 	<form margin="0"  style="font-size:25px;color:OldLace ;background-color:#6C4B37;" width="250px" align="centre" action="{% url 'play' %}" method="get">
 		{{ form|crispy }}
-		<STRONG style="font-size:25px;text-align:center;color:OldLace ">Question 1</STRONG>: Do you think you will be able to guess the upcoming word?
+		<STRONG style="font-size:25px;text-align:center;color:OldLace "></STRONG>Do you want to bet on whether you will be able to guess the upcoming word?
+		<p>
 		<INPUT TYPE="radio" NAME="q1" VALUE="y">Yes
 		<INPUT TYPE="radio" NAME="q1" VALUE="n">No
-		<STRONG style="font-size:25px;text-align:center;color:OldLace ">Question 2</STRONG>: How much would you like to bet?
+		</p>
+		<!-- <STRONG style="font-size:25px;text-align:center;color:OldLace ">Question 2</STRONG>: How much would you like to bet? -->
 		<input align="centre" type="number" min="0" name="bet" placeholder="answer" style="font-size:25px;text-align:center;color:OldLace;background-color:#6C4B37; ">		
 		<button align="centre" type="submit" style="font-size:25px;text-align:center;color:OldLace;background-color:#6C4B37; ">submit and play</button>
 	</form>

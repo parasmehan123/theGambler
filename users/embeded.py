@@ -4,6 +4,9 @@ def register_player(name,mobile_number,address,email):
     
     with connection.cursor() as cursor:
         cursor.execute("insert into player(name,mobile_number,address,email) values(\"%s\",\"%s\",\"%s\",\"%s\");",[name,mobile_number,address,email])
+        cursor.execute("SELECT LAST_INSERT_ID();")
+        player_id = cursor.fetchall()[0][0] 
+        cursor.execute("insert into account(player_id,current_balance,date_of_opening) values(%s,1000,NOW())",[player_id])
 
 def extract_data_player():
     with connection.cursor() as cursor:
@@ -162,3 +165,18 @@ def game_maker_max_profit(id):
                 tmp.append(tmp2)
             data.append(tmp)
     return (columns,data)
+
+def update_records(email,won,bet):
+    with connection.cursor() as cursor:
+        cursor.execute("select id from player where email like \"%s\"",[email])
+        player_id = cursor.fetchall()[0][0]
+        cursor.execute("insert into game_transaction(player_id,won_lost,bet,dt) values(%s,%s,%s,NOW());",[player_id,1 if won else 0,1 if bet else 0])
+        cursor.execute("select id from account where player_id = %s",[player_id])
+        account_id = cursor.fetchall()[0][0]
+        if bet:
+            if won:
+                cursor.execute("update account set current_balance = current_balance+100 where id = %s;",[account_id])
+            else:
+                cursor.execute("update account set current_balance = if ( current_balance>=100,current_balance-100,0) where id = %s;",[account_id])
+        else:
+            cursor.execute("update account set current_balance = if ( current_balance>=10,current_balance-10,0) where id = %s;",[account_id])

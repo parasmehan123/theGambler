@@ -35,7 +35,8 @@ def play(request):
 def checkans(request):
     global word, jword, message,betb, betv
     user_ans = request.GET["answer"]
-    print(betb, betv)
+    # print(betb, betv,betb=='y')
+    
     won = True
     if (user_ans in words):   
         message = "That was the correct answer. Great job!"
@@ -43,18 +44,8 @@ def checkans(request):
     else:
         won = False
         message = "Oop! Better Luck next time!"
-    # #comment starts here
-    # query = "insert into game_transaction(user_email,won_lost,dt) values(\""+request.user.email+"\","
-    # if won:
-    #     query += 'TRUE'
-    # else:
-    #     query += 'FALSE'
 
-    # query += ",NOW());"
-    # # print(query)
-    # with connection.cursor() as cursor:
-    #     cursor.execute(query)
-    # #comment ends here
+    update_records(request.user.email,won,betb=='y')
 
     return placebid(request)
 

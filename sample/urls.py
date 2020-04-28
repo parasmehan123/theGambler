@@ -27,6 +27,7 @@ urlpatterns = [
     path('logout/',auth_views.LogoutView.as_view(template_name='casino/index.html'),name='logout'),
     path('play/',user_views.play, name='play'),
     path('check/',user_views.checkans, name='check'),
+    path('placebid/',user_views.placebid, name='placebid'),
     #Edit user_view.profile to user_view.queryi here and create functions in user/views.py
     path('profile/query1a',user_views.query1a, name='query1a'),
     path('profile/query2a',user_views.query2a, name='query2a'),

@@ -39,7 +39,7 @@ def checkans(request):
         won = False
         message = "Oop! Better Luck next time!"
 
-    #update_records(request.user.email,won,betb=='y')
+    update_records(request.user.email,won,betb=='y')
 
     return placebid(request)
 
@@ -79,14 +79,17 @@ def guessno(request):
 def checknumber(request):
     global messagenumber,betgb, betgv
     user_ans = int(request.GET["number"])
+    won = True
     if (user_ans == num[-1]):
         messagenumber = "That was the correct answer. great Job!"
     else:
+        won = False
         messagenumber = "Oop! Better Luck next time!"
     context = {
         'user_ans' : user_ans,
         'num' : num 
     }
+    update_records(request.user.email,won,betgb=='y')
     return placebid_guessno(request)
 
 def register(request):

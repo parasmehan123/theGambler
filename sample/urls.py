@@ -28,6 +28,9 @@ urlpatterns = [
     path('play/',user_views.play, name='play'),
     path('check/',user_views.checkans, name='check'),
     path('placebid/',user_views.placebid, name='placebid'),
+    path('placebid_guessno/',user_views.placebid_guessno, name='placebid_guessno'),
+    path('guessno/',user_views.guessno, name='guessno'),
+    path('checknumber/',user_views.checknumber, name='checknumber'),
     #Edit user_view.profile to user_view.queryi here and create functions in user/views.py
     path('profile/query1a',user_views.query1a, name='query1a'),
     path('profile/query2a',user_views.query2a, name='query2a'),

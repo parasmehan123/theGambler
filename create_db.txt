@@ -53,7 +53,7 @@ drop table if exists manages;
 create table manages(id int primary key,employee_id int not null, manager_id int not null,foreign key (employee_id) references employee(id) on delete cascade on update cascade,foreign key (manager_id) references management(id) on delete cascade on update cascade);
 
 drop table if exists player_ranklist;
-create table player_ranklist(rank int primary key, player_id int not null,no_of_wins int not null, no_of_loses int not null, total_profit int not null, total_loss int not null, foreign key (player_id) references player(id) on delete cascade on update cascade); 
+create table player_ranklist(player_id int primary key,no_of_wins int not null, no_of_loses int not null, total_profit int not null, total_loss int not null, foreign key (player_id) references player(id) on delete cascade on update cascade); 
 
 drop table if exists game_details;
 create table game_details(id int primary key,rank int not null,game_id int not null, player_id int not null,no_of_wins int not null, no_of_losses int not null, amount_won int not null, amount_lost int not null, foreign key (game_id) references game(id)  on delete cascade on update cascade, foreign key (player_id) references player(id)  on delete cascade on update cascade);

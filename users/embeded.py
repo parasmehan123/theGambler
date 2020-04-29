@@ -8,6 +8,10 @@ def register_player(name,mobile_number,address,email):
         player_id = cursor.fetchall()[0][0] 
         cursor.execute("insert into account(player_id,current_balance,date_of_opening) values(%s,1000,NOW())",[player_id])
         cursor.execute("insert into player_email(player_id,email) values(%s,\"%s\");",[player_id,email])
+        cursor.execute("insert into player_ranklist(player_id,no_of_wins,no_of_loses,total_profit,total_loss) values(%s,0,0,0,0);",[player_id])
+        cursor.execute("insert into game_details(game_id,player_id,no_of_wins,no_of_losses,amount_won,amount_lost) values(4,%s,0,0,0,0);",[player_id])
+        cursor.execute("insert into game_details(game_id,player_id,no_of_wins,no_of_losses,amount_won,amount_lost) values(5,%s,0,0,0,0);",[player_id])
+        
 
 def extract_data_player():
     with connection.cursor() as cursor:

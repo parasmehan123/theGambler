@@ -168,11 +168,11 @@ def game_maker_max_profit(id):
             data.append(tmp)
     return (columns,data)
 
-def update_records(email,won,bet):
+def update_records(email,won,bet,game_id):
     with connection.cursor() as cursor:
         cursor.execute("select player_id from player_email where email like \"%s\"",[email])
         player_id = cursor.fetchall()[0][0]
-        cursor.execute("insert into game_transaction(player_id,won_lost,bet,dt) values(%s,%s,%s,NOW());",[player_id,1 if won else 0,1 if bet else 0])
+        cursor.execute("insert into game_transaction(game_id,player_id,won_lost,bet,dt) values(%s,%s,%s,%s,NOW());",[game_id,player_id,1 if won else 0,1 if bet else 0])
         cursor.execute("select id from account where player_id = %s",[player_id])
         account_id = cursor.fetchall()[0][0]
         if bet:

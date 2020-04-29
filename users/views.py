@@ -39,7 +39,7 @@ def checkans(request):
         won = False
         message = "Oop! Better Luck next time!"
 
-    update_records(request.user.email,won,betb=='y')
+    update_records(request.user.email,won,betb=='y',1)
 
     return placebid(request)
 
@@ -89,7 +89,7 @@ def checknumber(request):
         'user_ans' : user_ans,
         'num' : num 
     }
-    update_records(request.user.email,won,betgb=='y')
+    update_records(request.user.email,won,betgb=='y',2)
     return placebid_guessno(request)
 
 def register(request):

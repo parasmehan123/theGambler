@@ -1,11 +1,17 @@
 DROP TABLE IF EXISTS player;
-create table player(id int primary key auto_increment,name varchar(200) not null,mobile_number varchar(10),address varchar(1000),email varchar(1000));
+create table player(id int primary key auto_increment,name varchar(200) not null,mobile_number varchar(10),address varchar(1000));
+
+drop table if exists player_email;
+create table player_email(id int primary key auto_increment,player_id int not null,email varchar(1000) not null, foreign key (player_id) references player(id));
 
 DROP TABLE IF EXISTS account;
 create table account(id int primary key auto_increment,player_id int not null unique, current_balance int not null,date_of_opening datetime not null,foreign key (player_id) references player(id) on delete cascade on update cascade,check(current_balance >=0));
 
 drop table if exists employee;
-create table employee(id int primary key, name varchar(200),position varchar(100) not null,mobile varchar(200),address varchar(1000),salary int not null, email varchar(1000));
+create table employee(id int primary key, name varchar(200),position varchar(100) not null,mobile varchar(200),address varchar(1000),salary int not null);
+
+drop table if exists employee_email;
+create table employee_email(id int primary key auto_increment,employee_id int not null,email varchar(1000) not null, foreign key (employee_id) references employee(id));
 
 drop table if exists accounts_employee;
 create table accounts_employee(id int primary key auto_increment,office_number int not null, employee_id int not null,foreign key (employee_id) references employee(id) on delete cascade on update cascade);
@@ -38,7 +44,10 @@ drop table if exists online_game;
 create table online_game(id int primary key, game_id int not null,ip varchar(12) not null,foreign key (game_id) references game(id) on delete cascade on update cascade);
 
 drop tables if exists management;
-create table management(id int primary key,name varchar(200) not null,mobile varchar(10),roles varchar(1000) not null,email varchar(1000), salary int not null);
+create table management(id int primary key,name varchar(200) not null,mobile varchar(10),roles varchar(1000) not null, salary int not null);
+
+drop table if exists management_email;
+create table management_email(id int primary key auto_increment,management_id int not null,email varchar(1000) not null, foreign key (management_id) references management(id));
 
 drop table if exists manages;
 create table manages(id int primary key,employee_id int not null, manager_id int not null,foreign key (employee_id) references employee(id) on delete cascade on update cascade,foreign key (manager_id) references management(id) on delete cascade on update cascade);

@@ -319,8 +319,54 @@ td {
                     {% endif %}   
                   {% endif %}
               {% else %}
-           
-              {% endif %}
+              <a class="nav-item nav-link" style="font-size:25px;text-align:center;color:OldLace "  href="{% url 'query8a' %}">View Details</a>
+                {% if query == 8%}
+                  <style>
+
+                    th{
+                      padding: 20px;
+                    }
+                    td {
+                      padding: 10px;
+                    }
+                  </style>
+                  <div class="limiter">
+                    <div class="container-table100" style="background: #2A1A0A;">
+                      <div class="wrap-table100">
+                        
+                        <div class="table100 ver3 m-b-110">
+                          <div class="table100-head">
+                            <table>
+                              <thead>
+                                <tr class="row100 head">
+                                  {% for col in columns%}
+                                  <th class={{ col.meta }} style="color:#FFFFFF">{{ col.text }}</th>
+                                  {% endfor %}
+                                </tr>
+                              </thead>
+                            </table>
+                          </div>
+                
+                          <div class="table100-body js-pscroll">
+                            <table>
+                              <tbody>
+                                {% for row in data %}
+                                  <tr class="row100 body">
+                                    {% for col in row %}
+                                      <td class={{ col.meta }}>{{ col.text }}</td>
+                                    {% endfor %}
+                                  </tr>
+                                {% endfor%}
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                
+                      </div>
+                    </div>
+                  </div>
+                {% endif %}
+            {% endif %}
       <!--===============================================================================================-->	
     <script src={% static "vendor/jquery/jquery-3.2.1.min.js" %}></script>
     <!--===============================================================================================-->

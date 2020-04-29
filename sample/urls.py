@@ -40,4 +40,8 @@ urlpatterns = [
     path('profile/query6a',user_views.query6a, name='query6a'),
     path('profile/query7a',user_views.query7a, name='query7a'),
     path('profile/query8a',user_views.query8a, name='query8a'),
+    path('profile/query9a',user_views.query9a, name='query9a'),
+    path('profile/query10a',user_views.query10a, name='query10a'),
+    path('profile/query11a',user_views.query11a, name='query11a'),
+    path('profile/query12a',user_views.query12a, name='query12a'),
 ]

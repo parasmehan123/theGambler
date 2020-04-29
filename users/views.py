@@ -203,3 +203,27 @@ def query8a(request):
     columns,data = player_profile(request.user.email)
 
     return render(request,'users/profile.html',{'query':8,'data':data,'columns':columns})
+
+@login_required
+def query9a(request):
+    columns,data = player_game_details(request.user.email)
+
+    return render(request,'users/profile.html',{'query':9,'data':data,'columns':columns})
+
+@login_required
+def query10a(request):
+    columns,data = player_games_not_played(request.user.email)
+
+    return render(request,'users/profile.html',{'query':10,'data':data,'columns':columns})
+
+@login_required
+def query11a(request):
+    columns,data = player_account_balance(request.user.email)
+
+    return render(request,'users/profile.html',{'query':11,'data':data,'columns':columns})
+
+@login_required
+def query12a(request):
+    columns,data = player_ranklist()
+
+    return render(request,'users/profile.html',{'query':12,'data':data,'columns':columns})

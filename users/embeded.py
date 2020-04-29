@@ -213,3 +213,125 @@ def player_profile(email):
                 tmp.append(tmp2)
             data.append(tmp)
     return (columns,data)
+
+def player_game_details(email):
+    with connection.cursor() as cursor:
+        cursor.execute("select player_id from player_email where email like \"%s\"",[email])
+        player_id = cursor.fetchall()[0][0]
+        cursor.execute("SELECT no_of_wins,no_of_losses,G.name FROM game_details, game G WHERE player_id = %s and G.id = game_id;",[player_id])
+        columns_names = [col[0] for col in cursor.description]
+        data_raw = cursor.fetchall()
+
+        columns = []
+        c=1
+        for i in columns_names:
+            tmp = {
+                'text':i,
+                'meta':'cell100 column'+str(c),
+            }
+            columns.append(tmp)
+            c+=1
+        data = []
+        for i in data_raw:
+            tmp = []
+            c = 1
+            for col in i:
+                tmp2 = {
+                    'text' :col,
+                    'meta' : 'cell100 column'+str(c),
+                }
+                c+=1
+                tmp.append(tmp2)
+            data.append(tmp)
+    return (columns,data)
+
+def player_games_not_played(email):
+    with connection.cursor() as cursor:
+        cursor.execute("select player_id from player_email where email like \"%s\"",[email])
+        player_id = cursor.fetchall()[0][0]
+        cursor.execute("SELECT name	FROM game WHERE game.id not in (SELECT game_id  FROM game_details WHERE player_id = %s);",[player_id])
+        columns_names = [col[0] for col in cursor.description]
+        data_raw = cursor.fetchall()
+
+        columns = []
+        c=1
+        for i in columns_names:
+            tmp = {
+                'text':i,
+                'meta':'cell100 column'+str(c),
+            }
+            columns.append(tmp)
+            c+=1
+        data = []
+        for i in data_raw:
+            tmp = []
+            c = 1
+            for col in i:
+                tmp2 = {
+                    'text' :col,
+                    'meta' : 'cell100 column'+str(c),
+                }
+                c+=1
+                tmp.append(tmp2)
+            data.append(tmp)
+    return (columns,data)
+
+def player_account_balance(email):
+    with connection.cursor() as cursor:
+        cursor.execute("select player_id from player_email where email like \"%s\"",[email])
+        player_id = cursor.fetchall()[0][0]
+        cursor.execute("SELECT acc.current_balance FROM account acc where acc.player_id = %s;",[player_id])
+        columns_names = [col[0] for col in cursor.description]
+        data_raw = cursor.fetchall()
+
+        columns = []
+        c=1
+        for i in columns_names:
+            tmp = {
+                'text':i,
+                'meta':'cell100 column'+str(c),
+            }
+            columns.append(tmp)
+            c+=1
+        data = []
+        for i in data_raw:
+            tmp = []
+            c = 1
+            for col in i:
+                tmp2 = {
+                    'text' :col,
+                    'meta' : 'cell100 column'+str(c),
+                }
+                c+=1
+                tmp.append(tmp2)
+            data.append(tmp)
+    return (columns,data)
+
+def player_ranklist():
+    with connection.cursor() as cursor:
+        cursor.execute("select rank,player_id,name from player_ranklist,player where player.id = player_ranklist.player_id;")
+        columns_names = [col[0] for col in cursor.description]
+        data_raw = cursor.fetchall()
+
+        columns = []
+        c=1
+        for i in columns_names:
+            tmp = {
+                'text':i,
+                'meta':'cell100 column'+str(c),
+            }
+            columns.append(tmp)
+            c+=1
+        data = []
+        for i in data_raw:
+            tmp = []
+            c = 1
+            for col in i:
+                tmp2 = {
+                    'text' :col,
+                    'meta' : 'cell100 column'+str(c),
+                }
+                c+=1
+                tmp.append(tmp2)
+            data.append(tmp)
+    return (columns,data)

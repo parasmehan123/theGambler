@@ -366,6 +366,195 @@ td {
                     </div>
                   </div>
                 {% endif %}
+                <a class="nav-item nav-link" style="font-size:25px;text-align:center;color:OldLace "  href="{% url 'query9a' %}">View the total profit, total loss, and net profit/loss for each game played</a>
+                {% if query == 9%}
+                  <style>
+
+                    th{
+                      padding: 20px;
+                    }
+                    td {
+                      padding: 10px;
+                    }
+                  </style>
+                  <div class="limiter">
+                    <div class="container-table100" style="background: #2A1A0A;">
+                      <div class="wrap-table100">
+                        
+                        <div class="table100 ver3 m-b-110">
+                          <div class="table100-head">
+                            <table>
+                              <thead>
+                                <tr class="row100 head">
+                                  {% for col in columns%}
+                                  <th class={{ col.meta }} style="color:#FFFFFF">{{ col.text }}</th>
+                                  {% endfor %}
+                                </tr>
+                              </thead>
+                            </table>
+                          </div>
+                
+                          <div class="table100-body js-pscroll">
+                            <table>
+                              <tbody>
+                                {% for row in data %}
+                                  <tr class="row100 body">
+                                    {% for col in row %}
+                                      <td class={{ col.meta }}>{{ col.text }}</td>
+                                    {% endfor %}
+                                  </tr>
+                                {% endfor%}
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                
+                      </div>
+                    </div>
+                  </div>
+                {% endif %}
+                <a class="nav-item nav-link" style="font-size:25px;text-align:center;color:OldLace "  href="{% url 'query10a' %}">View games not played by the player</a>
+                {% if query == 10%}
+                  <style>
+
+                    th{
+                      padding: 20px;
+                    }
+                    td {
+                      padding: 10px;
+                    }
+                  </style>
+                  <div class="limiter">
+                    <div class="container-table100" style="background: #2A1A0A;">
+                      <div class="wrap-table100">
+                        
+                        <div class="table100 ver3 m-b-110">
+                          <div class="table100-head">
+                            <table>
+                              <thead>
+                                <tr class="row100 head">
+                                  {% for col in columns%}
+                                  <th class={{ col.meta }} style="color:#FFFFFF">{{ col.text }}</th>
+                                  {% endfor %}
+                                </tr>
+                              </thead>
+                            </table>
+                          </div>
+                
+                          <div class="table100-body js-pscroll">
+                            <table>
+                              <tbody>
+                                {% for row in data %}
+                                  <tr class="row100 body">
+                                    {% for col in row %}
+                                      <td class={{ col.meta }}>{{ col.text }}</td>
+                                    {% endfor %}
+                                  </tr>
+                                {% endfor%}
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                
+                      </div>
+                    </div>
+                  </div>
+                {% endif %}
+                <a class="nav-item nav-link" style="font-size:25px;text-align:center;color:OldLace "  href="{% url 'query11a' %}">View Current Balance</a>
+                {% if query == 11%}
+                  <style>
+
+                    th{
+                      padding: 20px;
+                    }
+                    td {
+                      padding: 10px;
+                    }
+                  </style>
+                  <div class="limiter">
+                    <div class="container-table100" style="background: #2A1A0A;">
+                      <div class="wrap-table100">
+                        
+                        <div class="table100 ver3 m-b-110">
+                          <div class="table100-head">
+                            <table>
+                              <thead>
+                                <tr class="row100 head">
+                                  {% for col in columns%}
+                                  <th class={{ col.meta }} style="color:#FFFFFF">{{ col.text }}</th>
+                                  {% endfor %}
+                                </tr>
+                              </thead>
+                            </table>
+                          </div>
+                
+                          <div class="table100-body js-pscroll">
+                            <table>
+                              <tbody>
+                                {% for row in data %}
+                                  <tr class="row100 body">
+                                    {% for col in row %}
+                                      <td class={{ col.meta }}>{{ col.text }}</td>
+                                    {% endfor %}
+                                  </tr>
+                                {% endfor%}
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                
+                      </div>
+                    </div>
+                  </div>
+                {% endif %}
+                <a class="nav-item nav-link" style="font-size:25px;text-align:center;color:OldLace "  href="{% url 'query12a' %}">View Current Ranklist of Players</a>
+                {% if query == 12%}
+                  <style>
+
+                    th{
+                      padding: 20px;
+                    }
+                    td {
+                      padding: 10px;
+                    }
+                  </style>
+                  <div class="limiter">
+                    <div class="container-table100" style="background: #2A1A0A;">
+                      <div class="wrap-table100">
+                        
+                        <div class="table100 ver3 m-b-110">
+                          <div class="table100-head">
+                            <table>
+                              <thead>
+                                <tr class="row100 head">
+                                  {% for col in columns%}
+                                  <th class={{ col.meta }} style="color:#FFFFFF">{{ col.text }}</th>
+                                  {% endfor %}
+                                </tr>
+                              </thead>
+                            </table>
+                          </div>
+                
+                          <div class="table100-body js-pscroll">
+                            <table>
+                              <tbody>
+                                {% for row in data %}
+                                  <tr class="row100 body">
+                                    {% for col in row %}
+                                      <td class={{ col.meta }}>{{ col.text }}</td>
+                                    {% endfor %}
+                                  </tr>
+                                {% endfor%}
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                
+                      </div>
+                    </div>
+                  </div>
+                {% endif %}
+                
             {% endif %}
       <!--===============================================================================================-->	
     <script src={% static "vendor/jquery/jquery-3.2.1.min.js" %}></script>

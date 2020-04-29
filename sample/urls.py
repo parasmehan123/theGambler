@@ -36,4 +36,5 @@ urlpatterns = [
     path('profile/query5a',user_views.query5a, name='query5a'),
     path('profile/query6a',user_views.query6a, name='query6a'),
     path('profile/query7a',user_views.query7a, name='query7a'),
+    path('profile/query8a',user_views.query8a, name='query8a'),
 ]

@@ -164,3 +164,8 @@ def query7a(request):
         form = Id_Form()
     return render(request,'users/profile.html',{'query':7,'form':form})
 
+@login_required
+def query8a(request):
+    columns,data = player_profile(request.user.email)
+
+    return render(request,'users/profile.html',{'query':8,'data':data,'columns':columns})

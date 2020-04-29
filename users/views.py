@@ -6,27 +6,23 @@ import random
 from .embeded import *
 words = ["casino","acute","gallon","communication","crosswalk","peasant","fix","knee","discrimination","indoor","paragraph","bathroom","fountain","acid","fasle","wealth","mayor","country","fee","march"]
 
-
-
-
 @login_required
 def profile(request):
     return render(request,'users/profile.html')
 
 message = ""
+messagenumber = ""
 @login_required
 def play(request):
     global word, message, jword ,betb, betv
     message = ""
     betb = request.GET["q1"]
-    betv = request.GET["bet"]
     word = random.choice(words)
     jum = random.sample(word,len(word))
     jword = "".join(jum)
     context = {
         'jword' : "".join(jum),
         'message' : message,
-        'betv' : betv,
         'betb' : betb
     }
 
@@ -35,17 +31,15 @@ def play(request):
 def checkans(request):
     global word, jword, message,betb, betv
     user_ans = request.GET["answer"]
-    # print(betb, betv,betb=='y')
-    
+    # print(betb, betv,betb=='y')   
     won = True
     if (user_ans in words):   
-        message = "That was the correct answer. Great job!"
-        
+        message = "That was the correct answer. Great job!"        
     else:
         won = False
         message = "Oop! Better Luck next time!"
 
-    update_records(request.user.email,won,betb=='y')
+    #update_records(request.user.email,won,betb=='y')
 
     return placebid(request)
 
@@ -56,7 +50,44 @@ def placebid(request):
         'message' : message,        
     }
     return render(request,'users/placebid.html',context)
-    
+
+messagenumber = ""   
+@login_required
+def placebid_guessno(request):
+    global betgb, betgv,messagenumber
+
+    context = {
+        'messagenumber' : messagenumber,
+
+    }
+    return render(request,'users/placebid_guessno.html',context)
+num = []
+@login_required
+def guessno(request):
+    global num, messagenumber,betgb, betgv
+    messagenumber = ""
+    number = random.randint(0,31)
+    num.append(number)  
+    betgb = request.GET["q2"]
+    context = {
+        'num' : num[-1],
+        'messagenumber' : messagenumber,
+        'betgb' : betgb
+    }
+    return render(request,'users/guessno.html',context)
+
+def checknumber(request):
+    global messagenumber,betgb, betgv
+    user_ans = int(request.GET["number"])
+    if (user_ans == num[-1]):
+        messagenumber = "That was the correct answer. great Job!"
+    else:
+        messagenumber = "Oop! Better Luck next time!"
+    context = {
+        'user_ans' : user_ans,
+        'num' : num 
+    }
+    return placebid_guessno(request)
 
 def register(request):
     if request.method == 'POST':

@@ -1,0 +1,22 @@
+{% extends "casino/base.html" %}
+{% load crispy_forms_tags%}
+{% block content %}
+	<p style="font-size:25px;text-align:center;color:OldLace ">{{ messagenumber }}</p>
+	<p style="font-size:25px;text-align:center;color:OldLace " >Place your Bet</p>
+	<div align="center" style="background-color:#6C4B37;">
+	<form margin="0"  style="font-size:25px;color:OldLace ;background-color:#6C4B37;" width="250px" align="centre" action="{% url 'guessno' %}" method="get">
+		{{ form|crispy }}
+		<STRONG style="font-size:25px;text-align:center;color:OldLace "></STRONG>Do you want to bet on whether you will be able to guess the upcoming number?
+		<p style="font-size:25px;text-align:center;color:OldLace ">If you click yes and you win, you will get 100 points</p>
+		<p style="font-size:25px;text-align:center;color:OldLace ">If you click yes and you loose, you will loose 100 points</p>
+		<p style="font-size:25px;text-align:center;color:OldLace ">If you click no, you will loose 10 points</p>
+		<p>
+		<INPUT TYPE="radio" NAME="q2" VALUE="y">Yes
+		<INPUT TYPE="radio" NAME="q2" VALUE="n">No
+		</p>		
+		<button align="centre" type="submit" style="font-size:25px;text-align:center;color:OldLace;background-color:#6C4B37; ">submit and play</button>
+	</form>
+	
+	<button align="centre" type="submit" style="font-size:25px;text-align:center;color:OldLace;background-color:#6C4B37; " onClick="location.href= {% url 'casino-home' %}">Go back to home</button>
+</div>	
+{% endblock content %}

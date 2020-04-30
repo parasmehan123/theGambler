@@ -78,17 +78,8 @@ WSGI_APPLICATION = 'sample.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'STORAGE_ENGINE': 'InnoDB',
-        'NAME': 'casino',
-        'USER': 'thegambler@gambler',
-        'HOST':'gambler.mysql.database.azure.com',
-        'PASSWORD':'james@123',
-        'PORT':'',
-        'OPTIONS': {
-            'init_command': 'SET default_storage_engine=InnoDB', 
-        }
-        
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 

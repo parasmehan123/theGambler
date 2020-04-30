@@ -12,6 +12,9 @@
     <link rel="stylesheet" type="text/css" href={% static 'casino/main.css' %}>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+
+
     <link href={% static "casino/style.css" %} rel="stylesheet" type="text/css">
     <title> The Gambler</title>
 </head>
@@ -40,21 +43,25 @@
           <tbody><tr>
             {% if user.is_authenticated %}
                 <td valign="top" align="left" width="37"><img src="{% static 'casino/images/nav_dvd.jpg' %}" height="46" width="37"></td>
-                <td align="center" valign="middle" width="50"><a href="{% url 'profile' %}" style="font-size:25px;color:OldLace;font-size:30px; " class="navbar2">Profile</a></td>
+                <td align="center" valign="middle" width="50"><a href="{% url 'profile' %}" style="color:OldLace;" class="navbar2">Profile</a></td>
                 <td valign="top" width="37"></td>
                 <td valign="top" width="37"><img src="{% static 'casino/images/nav_dvd.jpg' %}" height="46" width="37"></td>
-                <td align="center" valign="middle" width="50"><a href="{% url 'play' %}" style="font-size:25px;color:OldLace;font-size:30px; "  class="navbar2">Play Game</a></td>
+                <td align="center" valign="middle" width="50"><a href="{% url 'placebid' %}" style="color:OldLace; "  class="navbar2">Play Unjumbled</a></td>
                 <td valign="top" width="37"><img src="{% static 'casino/images/nav_dvd.jpg' %}" height="46" width="37"></td>
-                <td align="center" valign="middle" width="50"><a href="{% url 'logout' %}" style="font-size:25px;color:OldLace;font-size:30px; " class="navbar2">Logout</a></td>
+                <td align="center" valign="middle" width="50"><a href="{% url 'placebid_guessno' %}" style="color:OldLace; "  class="navbar2">Play GuessNumber</a></td>
+                <td valign="top" width="37"><img src="{% static 'casino/images/nav_dvd.jpg' %}" height="46" width="37"></td>
+                <td align="center" valign="middle" width="50"><a href="{% url 'logout' %}" style="color:OldLace;" class="navbar2">Logout</a></td>
                 <td valign="top" align="right" width="37"><img src="{% static 'casino/images/nav_dvd.jpg' %}" height="46" width="37"></td>
               {% else %}
                 <td valign="top" align="left" width="37"><img src="{% static 'casino/images/nav_dvd.jpg' %}" height="46" width="37"></td>
-                <td align="center" valign="middle" width="50"><a href="{% url 'login' %}" style="font-size:25px;color:OldLace;font-size:30px; " class="navbar2">Login</a></td>
+                <td align="center" valign="middle" width="50"><a href="{% url 'login' %}" style="color:OldLace;" class="navbar2">Login</a></td>
                 <td valign="top" width="37"></td>
                 <td valign="top" width="37"><img src="{% static 'casino/images/nav_dvd.jpg' %}" height="46" width="37"></td>
-                <td align="center" valign="middle" width="50"><a href="{% url 'play' %}" style="font-size:25px;color:OldLace;font-size:30px; "  class="navbar2">Play Game</a></td>
+                <td align="center" valign="middle" width="50"><a href="{% url 'placebid' %}" style="color:OldLace; "  class="navbar2">Play Unjumbled</a></td>
                 <td valign="top" width="37"><img src="{% static 'casino/images/nav_dvd.jpg' %}" height="46" width="37"></td>
-                <td align="center" valign="middle" width="50"><a href="{% url 'register' %}" style="font-size:25px;color:OldLace;font-size:30px; "  class="navbar2">Register</a></td>
+                <td align="center" valign="middle" width="50"><a href="{% url 'placebid_guessno' %}" style="color:OldLace; "  class="navbar2">Play GuessNumber</a></td>
+                <td valign="top" width="37"><img src="{% static 'casino/images/nav_dvd.jpg' %}" height="46" width="37"></td>
+                <td align="center" valign="middle" width="50"><a href="{% url 'register' %}" style="color:OldLace;"  class="navbar2">Register</a></td>
                 <td valign="top" align="right" width="37"><img src="{% static 'casino/images/nav_dvd.jpg' %}" height="46" width="37"></td>           
             {% endif %}
             

@@ -178,29 +178,30 @@ def update_records(email,won,bet,game_id):
         player_id = cursor.fetchall()[0][0]
         cursor.execute("insert into game_transaction(game_id,player_id,won_lost,bet,dt) values(%s,%s,%s,%s,NOW());",[game_id,player_id,1 if won else 0,1 if bet else 0])
         
+
         cursor.execute("update game_details set no_of_wins = no_of_wins + %s where player_id = %s AND game_id = %s ;",[1 if won else 0, player_id, game_id+3]  )
         connection.commit()
         cursor.execute("update game_details set no_of_losses = no_of_losses + %s where player_id = %s AND game_id = %s ;",[0 if won else 1, player_id, game_id+3]  )
         connection.commit()
-        cursor.execute("update game_details set amount_won = amount_won + %s where player_id = %s AND game_id = %s ;",[100 if won else 0, player_id, game_id+3]  )
+        cursor.execute("update game_details set amount_won = amount_won + %s where player_id = %s AND game_id = %s ;",[100 if won and bet else 0, player_id, game_id+3]  )
         connection.commit()
-        cursor.execute("update game_details set amount_lost = amount_lost + %s where player_id = %s AND game_id = %s ;",[0 if won else 100, player_id, game_id+3]  )
+        cursor.execute("update game_details set amount_lost = amount_lost + %s where player_id = %s AND game_id = %s ;",[10 if not bet else (0 if won else 100), player_id, game_id+3]  )
         connection.commit()
 
         cursor.execute("update player_ranklist set no_of_wins = no_of_wins + %s where player_id = %s ;",[1 if won else 0, player_id]  )
         connection.commit()
         cursor.execute("update player_ranklist set no_of_loses = no_of_loses + %s where player_id = %s ;",[0 if won else 1, player_id]  )
         connection.commit()
-        cursor.execute("update player_ranklist set total_profit = total_profit + %s where player_id = %s ;",[100 if won else 0, player_id]  )
+        cursor.execute("update player_ranklist set total_profit = total_profit + %s where player_id = %s ;",[100 if won and bet else 0, player_id]  )
         connection.commit()
-        cursor.execute("update player_ranklist set total_loss = total_loss + %s where player_id = %s ;",[0 if won else 100, player_id]  )
+        cursor.execute("update player_ranklist set total_loss = total_loss + %s where player_id = %s ;",[10 if not bet else (0 if won else 100), player_id]  )
         connection.commit()
 
         cursor.execute("update game set no_of_games_played = no_of_games_played + %s where id = %s ;", [1, game_id+3]  )
         connection.commit()
-        cursor.execute("update game set total_profit = total_profit + %s where id = %s ;",[100 if won else 0, game_id+3]  )
+        cursor.execute("update game set total_profit = total_profit + %s where id = %s ;",[100 if won and bet else 0, game_id+3]  )
         connection.commit()
-        cursor.execute("update game set total_loss = total_loss + %s where id = %s ;",[0 if won else 100, game_id+3]  )
+        cursor.execute("update game set total_loss = total_loss + %s where id = %s ;",[10 if not bet else (0 if won else 100), game_id+3]  )
         connection.commit()
         
         #Update ranklist in game_details

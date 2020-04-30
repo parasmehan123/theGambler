@@ -215,7 +215,7 @@ def update_records(email,won,bet,game_id):
         connection.commit()
         for x in data:
             # print(x)
-            cursor.execute("update game_details set rank = " + str(x[2]) + " where player_id = " + str(x[1]) + " && game_id = " + str(x[0] + 3) + " ;")
+            cursor.execute("update game_details set rank = %s where player_id = %s && game_id = %s ;",[x[2],x[1],x[0]+3])
             connection.commit()
 
 
@@ -230,7 +230,7 @@ def update_records(email,won,bet,game_id):
         connection.commit()
         for x in data:
             print(x)
-            cursor.execute("update player_ranklist set rank = " + str(x[1]) + " where player_id = " + str(x[0]) + " ;")
+            cursor.execute("update player_ranklist set rank = %s where player_id = %s ;",[x[1],x[0]])
             connection.commit()
 
         cursor.execute("select id from account where player_id = %s",[player_id])

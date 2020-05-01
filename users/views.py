@@ -107,13 +107,7 @@ def register(request):
 
 @login_required
 def profile(request):
-    if request.user.is_staff:
-        return render(request,'users/profile.html')
-    query = "select * from player where id = %s;"%(request.user.id+13)
-    columns,data =  extract_data(query)
-    # print(query)
-    return render(request,'users/profile.html',{'pro_data':data,'pro_columns':columns})
-
+    return render(request,'users/profile.html')
 
 @login_required
 def query1a(request):

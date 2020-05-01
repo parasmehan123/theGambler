@@ -78,17 +78,7 @@ WSGI_APPLICATION = 'sample.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'STORAGE_ENGINE': 'InnoDB',
-        'NAME': 'casino',
-        'USER': 'thegambler@gambler',
-        'HOST':'gambler.mysql.database.azure.com',
-        'PASSWORD':'sheldon@123',
-        'PORT':'',
-        'OPTIONS': {
-            'init_command': 'SET default_storage_engine=InnoDB', 
-        }
-        
+        ##
     }
 }
 

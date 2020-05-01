@@ -28,6 +28,7 @@ theGambler is a Database Management System that can be used by a casino. This DB
      * Get average salary for each component till each employee (Windowing)
 
 ## E-R Diagram for this DBMS
+![](er_diagram.png)
 ## Features Implemented 
 * Login and Authentication Features :
   * The player has the option to create a new account or login using a previously existing account.
@@ -65,4 +66,5 @@ theGambler is a Database Management System that can be used by a casino. This DB
   * Only the admin can create new users with employee status. 
   * A backup of the entire database is created every 24 hours to avoid any loss of data.
 
+# Repository Contents
 

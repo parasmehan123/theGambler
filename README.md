@@ -66,5 +66,19 @@ theGambler is a Database Management System that can be used by a casino. This DB
   * Only the admin can create new users with employee status. 
   * A backup of the entire database is created every 24 hours to avoid any loss of data.
 
-# Repository Contents
+## Repository Contents :
+ * The repo contains web application code written in Django framework.
+ * DataBackupScript/ contains the data backup script.
+ * images/ contains a few images of the web application.
+ * create_db.txt contains the create table commands for MySQL database.
+
+## Technologies Used :
+* Django
+* Git
+* Azure
+* Python3
+* HTML
+* CSS 
+* Lucid Chart
+* MySQL
 
